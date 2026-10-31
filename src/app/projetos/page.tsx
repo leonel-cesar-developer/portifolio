@@ -173,7 +173,7 @@ function ProjectCard({ project, featured = false }: ProjectCardProps) {
 
         {featured && (
           <span className="absolute left-5 top-5 rounded-full bg-white px-4 py-2 text-xs font-semibold text-slate-800 shadow-sm">
-            Projeto em destaque
+            Projeto em Destaque
           </span>
         )}
       </div>
@@ -201,7 +201,7 @@ function ProjectCard({ project, featured = false }: ProjectCardProps) {
         {featured && (
           <div className="mt-6">
             <h4 className="text-sm font-semibold text-slate-900">
-              Desafio do projeto
+              Desafio do Projeto
             </h4>
 
             <p className="mt-2 leading-7 text-slate-600">{project.challenge}</p>
@@ -232,7 +232,7 @@ function ProjectCard({ project, featured = false }: ProjectCardProps) {
             aria-label={`Abrir demonstração de ${project.name} numa nova aba`}
             className="inline-flex min-h-11 items-center gap-2 font-semibold text-blue-600 transition-colors hover:text-blue-800 focus-visible:rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600"
           >
-            Ver projeto
+            Ver Projeto
             <ArrowUpRight size={18} aria-hidden="true" />
           </a>
 
@@ -254,9 +254,9 @@ function ProjectCard({ project, featured = false }: ProjectCardProps) {
   );
 }
 
-// ==========================================
+// 
 // PROJECTS PAGE
-// ==========================================
+// 
 
 export default function ProjetosPage() {
   const featuredProject = PROJECTS.find((project) => project.featured);
