@@ -1,6 +1,8 @@
-
 import type { Metadata } from "next";
 import Link from "next/link";
+
+import Image from "next/image";
+
 import {
   ArrowRight,
   ArrowUpRight,
@@ -45,13 +47,7 @@ const PROJECTS = [
       "Dashboard para freelancers acompanharem projetos, finanças e produtividade numa interface centralizada.",
     challenge:
       "Organizar diferentes áreas da atividade profissional numa experiência de gestão clara e intuitiva.",
-    technologies: [
-      "React",
-      "Next.js",
-      "TypeScript",
-      "Zustand",
-      "Tailwind CSS",
-    ],
+    technologies: ["React", "Next.js", "TypeScript", "Zustand", "Tailwind CSS"],
     liveUrl: "https://freela-flow-fupc.vercel.app/",
     theme: "blue",
     featured: true,
@@ -64,12 +60,7 @@ const PROJECTS = [
       "Aplicação interativa inspirada em conceitos de gestão emocional e desenvolvimento pessoal.",
     challenge:
       "Apresentar conteúdos e interações de forma simples, acessível e organizada.",
-    technologies: [
-      "React",
-      "Next.js",
-      "React Hook Form",
-      "Zod",
-    ],
+    technologies: ["React", "Next.js", "React Hook Form", "Zod"],
     liveUrl: "https://mente-viva-two.vercel.app/",
     theme: "violet",
   },
@@ -81,12 +72,7 @@ const PROJECTS = [
       "Aplicação para gestão de agendamentos e serviços de petshops, com painel administrativo.",
     challenge:
       "Facilitar a organização de serviços e agendamentos através de uma interface de gestão.",
-    technologies: [
-      "React",
-      "Next.js",
-      "Tailwind CSS",
-      "TanStack Query",
-    ],
+    technologies: ["React", "Next.js", "Tailwind CSS", "TanStack Query"],
     liveUrl: "https://pet-dog-two.vercel.app/",
     theme: "emerald",
   },
@@ -140,10 +126,7 @@ type ProjectCardProps = {
   featured?: boolean;
 };
 
-function ProjectCard({
-  project,
-  featured = false,
-}: ProjectCardProps) {
+function ProjectCard({ project, featured = false }: ProjectCardProps) {
   const theme = PROJECT_THEMES[project.theme];
   const Icon = theme.icon;
 
@@ -160,12 +143,16 @@ function ProjectCard({
         }`}
       >
         {project.image ? (
-          <img
+          <Image
             src={project.image}
             alt={`Captura de ecrã do projeto ${project.name}`}
-            loading="lazy"
-            decoding="async"
-            className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 motion-reduce:transform-none"
+            fill
+            sizes={
+              featured
+                ? "(max-width: 1024px) 100vw, 66vw"
+                : "(max-width: 768px) 100vw, 33vw"
+            }
+            className="object-cover transition-transform duration-500 group-hover:scale-105 motion-reduce:transform-none"
           />
         ) : (
           <div className="flex flex-col items-center gap-4">
@@ -178,9 +165,7 @@ function ProjectCard({
               />
             </div>
 
-            <span
-              className={`text-sm font-semibold ${theme.foreground}`}
-            >
+            <span className={`text-sm font-semibold ${theme.foreground}`}>
               {project.name}
             </span>
           </div>
@@ -205,17 +190,13 @@ function ProjectCard({
 
         <h3
           className={`mt-3 font-bold tracking-tight text-slate-950 ${
-            featured
-              ? "text-3xl sm:text-4xl"
-              : "text-2xl"
+            featured ? "text-3xl sm:text-4xl" : "text-2xl"
           }`}
         >
           {project.name}
         </h3>
 
-        <p className="mt-4 leading-7 text-slate-600">
-          {project.description}
-        </p>
+        <p className="mt-4 leading-7 text-slate-600">{project.description}</p>
 
         {featured && (
           <div className="mt-6">
@@ -223,9 +204,7 @@ function ProjectCard({
               Desafio do projeto
             </h4>
 
-            <p className="mt-2 leading-7 text-slate-600">
-              {project.challenge}
-            </p>
+            <p className="mt-2 leading-7 text-slate-600">{project.challenge}</p>
           </div>
         )}
 
@@ -254,10 +233,7 @@ function ProjectCard({
             className="inline-flex min-h-11 items-center gap-2 font-semibold text-blue-600 transition-colors hover:text-blue-800 focus-visible:rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600"
           >
             Ver projeto
-            <ArrowUpRight
-              size={18}
-              aria-hidden="true"
-            />
+            <ArrowUpRight size={18} aria-hidden="true" />
           </a>
 
           {project.githubUrl && (
@@ -283,13 +259,9 @@ function ProjectCard({
 // ==========================================
 
 export default function ProjetosPage() {
-  const featuredProject = PROJECTS.find(
-    (project) => project.featured
-  );
+  const featuredProject = PROJECTS.find((project) => project.featured);
 
-  const otherProjects = PROJECTS.filter(
-    (project) => !project.featured
-  );
+  const otherProjects = PROJECTS.filter((project) => !project.featured);
 
   return (
     <main className="min-h-screen bg-white text-slate-900">
@@ -309,22 +281,15 @@ export default function ProjetosPage() {
             </h1>
 
             <p className="mt-7 max-w-2xl text-lg leading-8 text-slate-600">
-              Uma seleção de aplicações onde exploro
-              arquitetura Front-End, gestão de estado,
-              interfaces responsivas e integração
-              de diferentes tecnologias.
+              Uma seleção de aplicações onde exploro arquitetura Front-End,
+              gestão de estado, interfaces responsivas e integração de
+              diferentes tecnologias.
             </p>
 
             <div className="mt-8 flex items-center gap-3 text-sm font-medium text-slate-500">
-              <Code2
-                size={20}
-                aria-hidden="true"
-                className="text-blue-600"
-              />
+              <Code2 size={20} aria-hidden="true" className="text-blue-600" />
 
-              <span>
-                {PROJECTS.length} projetos apresentados
-              </span>
+              <span>{PROJECTS.length} projetos apresentados</span>
             </div>
           </div>
         </div>
@@ -332,10 +297,7 @@ export default function ProjetosPage() {
 
       {/* Featured Project */}
       {featuredProject && (
-        <section
-          aria-labelledby="featured-title"
-          className="px-6 pb-20"
-        >
+        <section aria-labelledby="featured-title" className="px-6 pb-20">
           <div className="mx-auto max-w-6xl">
             <h2
               id="featured-title"
@@ -344,10 +306,7 @@ export default function ProjetosPage() {
               Em destaque
             </h2>
 
-            <ProjectCard
-              project={featuredProject}
-              featured
-            />
+            <ProjectCard project={featuredProject} featured />
           </div>
         </section>
       )}
@@ -372,18 +331,14 @@ export default function ProjetosPage() {
               </h2>
 
               <p className="mt-4 leading-7 text-slate-600">
-                Aplicações desenvolvidas para explorar
-                diferentes problemas, ferramentas
-                e experiências de utilização.
+                Aplicações desenvolvidas para explorar diferentes problemas,
+                ferramentas e experiências de utilização.
               </p>
             </div>
 
             <div className="grid gap-6 md:grid-cols-2">
               {otherProjects.map((project) => (
-                <ProjectCard
-                  key={project.id}
-                  project={project}
-                />
+                <ProjectCard key={project.id} project={project} />
               ))}
             </div>
           </div>
@@ -399,9 +354,8 @@ export default function ProjetosPage() {
             </h2>
 
             <p className="mt-4 leading-7 text-slate-300">
-              Estou disponível para conversar sobre
-              oportunidades de desenvolvimento
-              Front-End e colaboração em projetos.
+              Estou disponível para conversar sobre oportunidades de
+              desenvolvimento Front-End e colaboração em projetos.
             </p>
           </div>
 
@@ -410,10 +364,7 @@ export default function ProjetosPage() {
             className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 self-start rounded-xl bg-blue-600 px-6 font-semibold text-white transition-colors hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
           >
             Entrar em contacto
-            <ArrowRight
-              size={18}
-              aria-hidden="true"
-            />
+            <ArrowRight size={18} aria-hidden="true" />
           </Link>
         </div>
       </section>
